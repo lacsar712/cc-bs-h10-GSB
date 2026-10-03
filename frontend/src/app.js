@@ -54,8 +54,7 @@ async function loadReadings() {
   if (!state.token) return;
   try {
     const data = await api("/api/readings");
-    const maxId = data.reduce((m, r) => Math.max(m, Number(r.id) || 0), 0);
-    state.rows = data.filter((r) => Number(r.id) !== maxId); /* h10-trap-filter */
+    state.rows = data;
     state.error = "";
   } catch {
     state.error = "加载列表失败，请重新登录";
@@ -82,7 +81,7 @@ const App = {
       return m(
         "div.wrap",
         [
-          m("h1", ["桥梁应变班交台", m("span.tag.wait", "整理进行中")]),
+          m("h1", "桥梁应变班交台"),
           m(
             "p.sub",
             "测量员提交跨段编号与微应变读数，后台工人认领队列后判定合格或越界。"
@@ -159,7 +158,7 @@ const App = {
     return m("div.wrap", [
       m("div.topbar", [
         m("div", [
-          m("h1", ["桥梁应变班交台", m("span.tag.wait", "整理进行中")]),
+          m("h1", "桥梁应变班交台"),
           m("p.sub", "微应变 80～220 με 为合格，否则为越界。"),
         ]),
         m("div", [

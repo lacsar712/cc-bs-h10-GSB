@@ -122,8 +122,7 @@ async def list_readings(request):
                 "processed_at": _iso(r["processed_at"]),
             }
         )
-    from h10_ui_trap import filter_payload
-    return sanic_json(filter_payload(out))
+    return sanic_json(out)
 
 
 @app.post("/api/readings")
